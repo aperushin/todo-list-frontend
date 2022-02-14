@@ -1,0 +1,5 @@
+<mat-form-field class="field" [class.-error]="(isError$ | async)" appearance="outline">
+  <mat-label>{{ placeholder }}</mat-label>
+  <input matInput [placeholder]="placeholder" [formControl]="control">
+  <mat-error *ngIf="(isError$ | async)">{{ getErrorMessage() }}</mat-error>
+</mat-form-field>

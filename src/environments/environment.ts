@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiEndpoint: '/',
+  vkAuthLink: 'http://51.250.28.87/oauth/login/vk-oauth2',
 };
 
 /*

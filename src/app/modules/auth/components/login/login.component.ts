@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormValidatorService } from "../../../../services/form-validator.service";
 import { UserService } from "../../../../services/user.service";
 import { getErrors, setErrorToForm } from "../../../shared/helpers/form";
+import { BehaviorSubject, finalize } from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -16,6 +17,7 @@ import { getErrors, setErrorToForm } from "../../../shared/helpers/form";
   providers: [FormValidatorService],
 })
 export class LoginComponent {
+  isLoading$ = new BehaviorSubject<boolean>(false);
   vkAuthLink = this.userService.vkAuthLink;
   form = this.fb.group({
     username: '',
@@ -32,9 +34,12 @@ export class LoginComponent {
   }
 
   onSend(): void {
+    this.snackBar.dismiss();
+    this.isLoading$.next(true);
     this.userService.login(this.form.getRawValue()).pipe(
+      finalize(() => this.isLoading$.next(false)),
       untilDestroyed(this),
-    ).subscribe(res => {
+    ).subscribe(() => {
       this.router.navigateByUrl('/');
       this.snackBar.open('Успешная авторизация', 'Закрыть', {
         duration: 2000

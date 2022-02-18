@@ -21,5 +21,9 @@
 
   <div class="divider"></div>
 
-  <button mat-raised-button color="primary" type="submit">Сохранить</button>
+  <button mat-raised-button color="primary" type="submit">Авторизоваться</button>
+
+  <div *ngIf="isLoading$ | async" class="spinner-absolute">
+    <mat-spinner></mat-spinner>
+  </div>
 </form>

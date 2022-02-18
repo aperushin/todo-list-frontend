@@ -25,6 +25,7 @@ import { LayoutComponent } from "./modules/main/components/layout/layout.compone
 import { SignUpComponent } from "./modules/auth/components/sign-up/sign-up.component";
 import { ProfileComponent } from "./modules/main/components/profile/profile.component";
 import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.ser
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     CookieService,

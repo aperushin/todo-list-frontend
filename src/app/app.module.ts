@@ -3,28 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { LoginComponent } from './components/login/login.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './routing/routes';
-import { AuthPageComponent } from './components/auth-page/auth-page.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { FormFieldComponent } from './components/form-field/form-field.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { RightSidePanelComponent } from './components/right-side-panel/right-side-panel.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileComponent } from './components/profile/profile.component';
 import { CookieService } from 'ngx-cookie-service';
-import { CsrfInterceptor } from './interseptor/csrf-interceptor.service';
+import { AuthPageComponent } from "./modules/auth/components/auth-page/auth-page.component";
+import { FormFieldComponent } from "./modules/shared/components/form-field/form-field.component";
+import { HeaderComponent } from "./modules/main/components/header/header.component";
+import { RightSidePanelComponent } from "./modules/main/components/right-side-panel/right-side-panel.component";
+import { LoginComponent } from "./modules/auth/components/login/login.component";
+import { MenuComponent } from "./modules/main/components/menu/menu.component";
+import { LayoutComponent } from "./modules/main/components/layout/layout.component";
+import { SignUpComponent } from "./modules/auth/components/sign-up/sign-up.component";
+import { ProfileComponent } from "./modules/main/components/profile/profile.component";
+import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.service";
 
 @NgModule({
   declarations: [

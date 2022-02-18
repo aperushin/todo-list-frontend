@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { getInitials } from 'src/app/helpers/get-initials';
+import { getInitials } from 'src/app/modules/shared/helpers/get-initials';
+import { UserService } from "../../../../services/user.service";
 
 @Component({
   selector: 'app-header',

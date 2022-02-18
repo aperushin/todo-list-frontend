@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormValidatorService } from '../../services/form-validator.service';
 import { map, merge, Observable } from 'rxjs';
+import { FormValidatorService } from "../../../../services/form-validator.service";
 
 @Component({
   selector: 'app-form-field',
@@ -19,7 +19,6 @@ export class FormFieldComponent {
     private formValidatorService: FormValidatorService,
   ) {
   }
-
 
   ngOnInit(): void {
     this.isError$ = merge(

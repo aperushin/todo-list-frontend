@@ -1,9 +1,10 @@
-import { LayoutComponent } from '../components/layout/layout.component';
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { AuthPageComponent } from '../components/auth-page/auth-page.component';
-import { LoginComponent } from '../components/login/login.component';
-import { SignUpComponent } from '../components/sign-up/sign-up.component';
+import { AuthPageComponent } from "../modules/auth/components/auth-page/auth-page.component";
+import { LayoutComponent } from "../modules/main/components/layout/layout.component";
+import { LoginComponent } from "../modules/auth/components/login/login.component";
+import { SignUpComponent } from "../modules/auth/components/sign-up/sign-up.component";
+
 
 export const ROUTES: Routes = [
   {

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { getErrors, setErrorToForm } from '../../helpers/form';
-import { FormValidatorService } from '../../services/form-validator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Router } from '@angular/router';
+import { FormValidatorService } from "../../../../services/form-validator.service";
+import { UserService } from "../../../../services/user.service";
+import { getErrors, setErrorToForm } from "../../../shared/helpers/form";
 
 @UntilDestroy()
 @Component({

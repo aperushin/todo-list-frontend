@@ -1,4 +1,4 @@
-import { User } from '../models/user';
+import { User } from "../../../models/user";
 
 export function getInitials(user: User): string {
   if (!user.first_name && !user.last_name) {

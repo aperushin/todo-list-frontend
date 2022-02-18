@@ -2,3 +2,26 @@
   background: #fafafa;
   border-right: 1px solid #0000001f;
 }
+
+.root {
+  padding: 32px 0 16px 32px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.link {
+  color: #333;
+  display: block;
+  text-decoration: none;
+  border-radius: 3px;
+
+  &.-active {
+    background: #3f51b526;
+    color: #3f51b5;
+  }
+}
+

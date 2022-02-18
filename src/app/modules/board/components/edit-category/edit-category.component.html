@@ -1,0 +1,8 @@
+<form class="root" [formGroup]="form" (submit)="save()">
+  <app-form-field
+    placeholder="Название"
+    [control]="form.get('title')"
+  ></app-form-field>
+
+  <button mat-raised-button color="primary">Сохранить</button>
+</form>

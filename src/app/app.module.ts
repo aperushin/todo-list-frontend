@@ -25,6 +25,10 @@ import { LayoutComponent } from "./modules/main/components/layout/layout.compone
 import { SignUpComponent } from "./modules/auth/components/sign-up/sign-up.component";
 import { ProfileComponent } from "./modules/main/components/profile/profile.component";
 import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.service";
+import { CategoriesComponent } from './modules/board/components/categories/categories.component';
+import { MatListModule } from "@angular/material/list";
+import { EditCategoryComponent } from './modules/board/components/edit-category/edit-category.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -38,6 +42,8 @@ import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.ser
     SignUpComponent,
     RightSidePanelComponent,
     ProfileComponent,
+    CategoriesComponent,
+    EditCategoryComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +58,8 @@ import { CsrfInterceptor } from "./modules/main/interseptor/csrf-interceptor.ser
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     MatIconModule,
+    MatListModule,
+    MatDialogModule,
   ],
   providers: [
     CookieService,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap, tap } from 'rxjs';
 import { UpdatePasswordRequest, User, UserData, UserLogin, UserRegistration } from '../models/user';
 import { UserApiService } from './user-api.service';
 import { Router } from '@angular/router';
@@ -37,15 +37,16 @@ export class UserService {
 
   signUp(form: UserRegistration): Observable<void> {
     return this.userApiService.signUp(form).pipe(
+      switchMap(() => this.login(form)),
       map(user => {
         this.user.next(user);
       }),
     );
   }
 
-  login(form: UserLogin): Observable<void> {
+  login(form: UserLogin): Observable<User> {
     return this.userApiService.login(form).pipe(
-      map(user => {
+      tap(user => {
         this.user.next(user);
       }),
     );

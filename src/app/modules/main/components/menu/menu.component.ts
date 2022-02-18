@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MENU } from "../../../../routing/menu";
 
 @Component({
   selector: 'app-menu',
@@ -7,8 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent implements OnInit {
+  menu = MENU;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

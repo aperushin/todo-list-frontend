@@ -29,6 +29,7 @@ import { CategoriesComponent } from './modules/board/components/categories/categ
 import { MatListModule } from "@angular/material/list";
 import { EditCategoryComponent } from './modules/board/components/edit-category/edit-category.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     MatIconModule,
+    MatProgressSpinnerModule,
     MatListModule,
     MatDialogModule,
   ],

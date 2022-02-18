@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormValidatorService } from "../../../../services/form-validator.service";
 import { UserService } from "../../../../services/user.service";
 import { getErrors, setErrorToForm } from "../../../shared/helpers/form";
+import { BehaviorSubject, finalize } from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -16,7 +17,7 @@ import { getErrors, setErrorToForm } from "../../../shared/helpers/form";
   providers: [FormValidatorService],
 })
 export class SignUpComponent {
-
+  isLoading$ = new BehaviorSubject<boolean>(false);
   form = this.fb.group({
     username: '',
     first_name: '',
@@ -37,9 +38,12 @@ export class SignUpComponent {
 
   onSend(): void {
     this.snackBar.dismiss();
-
+    this.isLoading$.next(true);
     this.userService.signUp(this.form.getRawValue())
-      .pipe(untilDestroyed(this))
+      .pipe(
+        finalize(() => this.isLoading$.next(false)),
+        untilDestroyed(this)
+      )
       .subscribe(res => {
         this.router.navigateByUrl('/');
         this.snackBar.open('Успешная авторизация', 'Закрыть', {

@@ -1,18 +1,22 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { format } from 'date-fns'
 
 export type ApiErrors = Record<string, string[]>;
 
 export function setErrorToForm(form: FormGroup, errors: ApiErrors): void {
   Object.entries(errors).forEach(([field, errorList]) => {
-    const errorMap = errorList.reduce((obj, value, index) => {
-      // @ts-ignore
-      obj['apiError' + index] = value;
-      return obj;
-    }, {});
-
-    form.controls[field].setErrors(errorMap, { emitEvent: true });
+    setErrorToControl(form.controls[field], errorList);
   })
+}
+
+export function setErrorToControl(control: AbstractControl, errors: string[]): void {
+  const errorMap = errors.reduce((obj, value, index) => {
+    // @ts-ignore
+    obj['apiError' + index] = value;
+    return obj;
+  }, {});
+  control.setErrors(errorMap, { emitEvent: true });
 }
 
 export function getErrors(httpError: HttpErrorResponse): { nonFieldErrors: string[], apiErrors: ApiErrors } {
@@ -34,4 +38,16 @@ export function getErrors(httpError: HttpErrorResponse): { nonFieldErrors: strin
     apiErrors: apiErrors || {},
     nonFieldErrors,
   }
+}
+
+export function prepareDate(date: Date | null | string): string | null {
+  if (!date) {
+    return null;
+  }
+
+  if (typeof date === 'string') {
+    return date;
+  }
+
+  return format(date, 'yyyy-MM-dd');
 }

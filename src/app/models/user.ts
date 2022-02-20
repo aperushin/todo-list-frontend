@@ -24,6 +24,6 @@ export interface UserData {
   username: string;
 }
 
-export interface User extends UserData{
+export interface User extends UserData {
   id: number;
 }

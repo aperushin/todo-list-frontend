@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
 import { MENU } from "../../../../routing/menu";
+import { DynamicMenu, Menu, StaticMenu } from "../../../../models/menu";
 
 @Component({
   selector: 'app-menu',
@@ -7,13 +8,24 @@ import { MENU } from "../../../../routing/menu";
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   menu = MENU;
 
-  constructor() {
+  isStatic(item: Menu): item is StaticMenu {
+    return !!(item as StaticMenu).name;
   }
 
-  ngOnInit(): void {
+  isDynamic(item: Menu): item is DynamicMenu {
+    return !!(item as DynamicMenu).getName;
+  }
+
+  constructor(
+    public injector: Injector,
+  ) {
+  }
+
+  prepareName(name: string): string {
+    return name.replace('<sub>', '<i class="material-icons">subdirectory_arrow_right</i>')
   }
 
 }

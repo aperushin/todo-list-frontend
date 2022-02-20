@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Optional,
+  Output
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, merge, Observable } from 'rxjs';
 import { FormValidatorService } from "../../../../services/form-validator.service";
+import { VALIDATION_ERRORS } from "../../../../models/validation";
+import { Entity } from "../../../../models/base";
 
 @Component({
   selector: 'app-form-field',
@@ -11,16 +21,26 @@ import { FormValidatorService } from "../../../../services/form-validator.servic
 })
 export class FormFieldComponent {
   @Input() placeholder = '';
+  @Input() label = '';
   @Input() control!: FormControl;
+  @Input() type: 'input' | 'textarea' | 'select' | 'date' = 'input';
+  @Input() selectList!: Entity[];
+  @Input() multiple = false;
+
+  @Output() submit = new EventEmitter<void>();
 
   isError$!: Observable<boolean>;
 
   constructor(
-    private formValidatorService: FormValidatorService,
+    @Optional() private formValidatorService: FormValidatorService,
   ) {
   }
 
   ngOnInit(): void {
+    if (!this.formValidatorService) {
+      return;
+    }
+
     this.isError$ = merge(
       this.formValidatorService.update$,
       this.control.valueChanges,
@@ -30,7 +50,18 @@ export class FormFieldComponent {
   }
 
   getErrorMessage(): string {
-    return this.control.errors ? Object.values(this.control.errors).join(',') : '';
+    if (!this.control.errors) {
+      return '';
+    }
+
+    return Object.entries(this.control.errors)
+      .map(([key, value]) => {
+        if (typeof value === 'string') {
+          return value;
+        }
+
+        return key;
+      }).map(error => VALIDATION_ERRORS[error] || error).join(',')
   }
 
 }

@@ -1,24 +1,30 @@
 <div class="root">
-  <!--div class="menu">
-    <a
-      *ngFor="let item of menu"
-      class="link"
-      [routerLink]="item.path"
-      routerLinkActive="-active"
-    >
-      <button class="button" mat-button>{{ item.name }}</button>
-    </a>
-  </div-->
   <mat-nav-list>
-    <a
-      *ngFor="let item of menu"
-      mat-list-item
-      class="link"
-      [routerLink]="item.path"
-      routerLinkActive="-active"
-    >
-      {{ item.name }}
-    </a>
+    <ng-container *ngFor="let item of menu">
+      <a
+        *ngIf="isStatic(item)"
+        mat-list-item
+        class="link"
+        [routerLink]="item.path"
+        [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="-active"
+      >
+        {{ item.name }}
+      </a>
 
+      <ng-container *ngIf="isDynamic(item)">
+        <a
+          *ngIf="(item.getName(injector) | async) as name"
+          mat-list-item
+          class="link"
+          [routerLink]="item.getPath(injector) | async"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="-active"
+        >
+          <span class="custom-title" [innerHTML]="name"></span>
+        </a>
+      </ng-container>
+
+    </ng-container>
   </mat-nav-list>
 </div>

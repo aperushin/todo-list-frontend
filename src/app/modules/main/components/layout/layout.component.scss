@@ -16,6 +16,7 @@
 .main-container {
   flex: 1;
   display: flex;
+  max-height: calc(100vh - 40px);
 }
 
 .content {

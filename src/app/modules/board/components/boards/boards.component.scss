@@ -6,15 +6,6 @@
   box-sizing: border-box;
 }
 
-.head {
-  display: flex;
-  align-items: center;
-}
-
-.add-button {
-  margin-left: 16px;
-}
-
 .content {
   flex: 1;
   margin-top: 20px;
@@ -32,10 +23,6 @@
 .field {
   font-size: 12px;
   margin-bottom: -18px;
-
-  & + & {
-    margin-left: 8px;
-  }
 }
 
 .table {

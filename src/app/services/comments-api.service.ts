@@ -27,7 +27,7 @@ export class CommentsApiService {
   }
 
   updateComment(request: CommentRequest, id: number): Observable<CommentDTO> {
-    return this.httpClient.patch<CommentDTO>(environment.apiEndpoint + 'goals/goal_comment/' + id, request);
+    return this.httpClient.put<CommentDTO>(environment.apiEndpoint + 'goals/goal_comment/' + id, request);
   }
 
   deleteComment(id: number): Observable<void> {

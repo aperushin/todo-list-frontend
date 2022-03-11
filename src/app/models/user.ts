@@ -27,3 +27,22 @@ export interface UserData {
 export interface User extends UserData {
   id: number;
 }
+
+export enum ParticipantRole {
+  creator = 1,
+  write = 2,
+  read = 3,
+}
+
+export interface Participant {
+  role: ParticipantRole;
+  user: string;
+}
+
+export interface ParticipantDetail {
+  id: number;
+  role: ParticipantRole;
+  user: string;
+  created: string;
+  updated: string;
+}

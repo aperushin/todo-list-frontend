@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
 import { MENU } from "../../../../routing/menu";
-import { DynamicMenu, Menu, StaticMenu } from "../../../../models/menu";
+import { DynamicMenu, Menu, MenuSeparator, MenuView, StaticMenu } from "../../../../models/menu";
 
 @Component({
   selector: 'app-menu',
@@ -17,6 +17,10 @@ export class MenuComponent {
 
   isDynamic(item: Menu): item is DynamicMenu {
     return !!(item as DynamicMenu).getName;
+  }
+
+  isSeparator(item: MenuView): item is MenuSeparator {
+    return (item as MenuSeparator).isSeparator;
   }
 
   constructor(

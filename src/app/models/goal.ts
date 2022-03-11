@@ -22,6 +22,7 @@ export interface GoalData {
   due_date: string;
   category: number;
   priority: GoalPriority;
+  board: number;
 }
 
 export interface Goal extends GoalData {
@@ -50,6 +51,7 @@ export const PRIORITY_STATUS_LIST: Entity<GoalPriority>[] = [
 ];
 
 export interface GoalsRequest {
+  board?: number;
   ordering?: string;
   search?: string;
   priority?: string;

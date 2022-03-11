@@ -5,6 +5,7 @@ import { LayoutComponent } from "../modules/main/components/layout/layout.compon
 import { LoginComponent } from "../modules/auth/components/login/login.component";
 import { SignUpComponent } from "../modules/auth/components/sign-up/sign-up.component";
 import { MENU } from "./menu";
+import { Menu, MenuSeparator } from "../models/menu";
 
 export const ROUTES: Routes = [
   {
@@ -12,7 +13,7 @@ export const ROUTES: Routes = [
     canActivate: [AuthGuard],
     component: LayoutComponent,
     children: [
-      ...MENU,
+      ...MENU.filter(item => !(item as MenuSeparator)?.isSeparator) as Menu[],
       {
         path: '',
         redirectTo: 'categories',

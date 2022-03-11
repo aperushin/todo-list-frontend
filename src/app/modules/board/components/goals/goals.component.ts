@@ -14,6 +14,7 @@ import { prepareDate } from "../../../shared/helpers/form";
 import { FormControl } from "@angular/forms";
 import { GoalDetailComponent } from "../goal-detail/goal-detail.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { BoardsService } from "../../../../services/boards.service";
 
 const GOAL_FORM_HEIGHT = 440;
 const BOTTOM_OFFSET = 350;
@@ -25,6 +26,7 @@ const ORDER_FIELD_LIST = [
 
 interface SearchForm {
   search: string;
+  board: number | '';
   priority__in: number[];
   category__in: number[];
   status__in: number[];
@@ -52,6 +54,9 @@ export class GoalsComponent implements OnDestroy, OnInit {
   listByStatus$ = new BehaviorSubject<Record<GoalStatus, Goal[]>>(this.prepareItems([]));
   searchControl = new FormControl('');
   orderControl = new FormControl('');
+  boards$ = this.boardsService.boards$.pipe(
+    map(list => ([{ id: '', title: 'Все' }, ...list]))
+  );
 
   constructor(
     private currentCategoryService: CurrentCategoryService,
@@ -60,6 +65,7 @@ export class GoalsComponent implements OnDestroy, OnInit {
     private dialog: MatDialog,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private boardsService: BoardsService,
   ) {
     this.priorityMap = PRIORITY_STATUS_LIST.reduce((obj, item) => ({
       ...obj,
@@ -75,43 +81,41 @@ export class GoalsComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.category$.pipe(
-      take(1),
-      untilDestroyed(this)
-    ).subscribe(category => {
-      this.dataSource = new DataSource<Goal, SearchForm>(
-        {
-          search: '',
-          priority__in: [],
-          category__in: category ? [category.id] : [],
-          status__in: [],
-          due_date__lte: null,
-          due_date__gte: null,
-        },
-        this.loadGoals.bind(this),
-        this.goalsService.refresh$,
-      );
-      this.dataSource.list$.pipe(
-        map(list => this.prepareItems(list)),
-        untilDestroyed(this),
-      ).subscribe(data => {
-        this.listByStatus$.next(data);
-      });
-      this.isLoading$ = this.dataSource.isLoading$;
+    const { categoryId, boardId } = this.activatedRoute.snapshot.params;
 
-      this.searchControl.valueChanges.pipe(
-        debounceTime(300),
-        untilDestroyed(this)
-      ).subscribe(search => {
-        this.dataSource?.searchForm.patchValue({ search });
-      })
-
-      this.orderControl.valueChanges.pipe(
-        untilDestroyed(this)
-      ).subscribe(field => {
-        this.dataSource?.setOrderField(field);
-      })
+    this.dataSource = new DataSource<Goal, SearchForm>(
+      {
+        search: '',
+        board: boardId ? parseInt(boardId) : '',
+        priority__in: [],
+        category__in: categoryId ? [parseInt(categoryId)] : [],
+        status__in: [],
+        due_date__lte: null,
+        due_date__gte: null,
+      },
+      this.loadGoals.bind(this),
+      this.goalsService.refresh$,
+    );
+    this.dataSource.list$.pipe(
+      map(list => this.prepareItems(list)),
+      untilDestroyed(this),
+    ).subscribe(data => {
+      this.listByStatus$.next(data);
     });
+    this.isLoading$ = this.dataSource.isLoading$;
+
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      untilDestroyed(this)
+    ).subscribe(search => {
+      this.dataSource?.searchForm.patchValue({ search });
+    })
+
+    this.orderControl.valueChanges.pipe(
+      untilDestroyed(this)
+    ).subscribe(field => {
+      this.dataSource?.setOrderField(field);
+    })
 
     this.handlePopup();
   }
@@ -142,16 +146,13 @@ export class GoalsComponent implements OnDestroy, OnInit {
 
   addGoal(status: GoalStatus, elem: any): void {
     const doomRect = elem._elementRef.nativeElement.getBoundingClientRect();
+    const { categoryId, boardId } = this.activatedRoute.snapshot.params;
 
-    this.category$.pipe(
-      take(1),
-      untilDestroyed(this),
-    ).subscribe(category => {
-      this.openEditPopup({
-        status,
-        category: category?.id,
-      }, doomRect);
-    })
+    this.openEditPopup({
+      status,
+      category: categoryId ? parseInt(categoryId) : 0,
+      board: boardId ? parseInt(boardId) : 0,
+    }, doomRect);
   }
 
   trackById(item: Goal): number {
@@ -215,6 +216,7 @@ export class GoalsComponent implements OnDestroy, OnInit {
       status__in: query.search.status__in.join(','),
       due_date__lte: prepareDate(query.search.due_date__lte),
       due_date__gte: prepareDate(query.search.due_date__gte),
+      board: query.search.board || undefined,
     })
   }
 

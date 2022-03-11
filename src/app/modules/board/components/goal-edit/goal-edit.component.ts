@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/cor
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder } from "@angular/forms";
 import { FormValidatorService } from "../../../../services/form-validator.service";
-import { GoalData, GOAL_STATUS_LIST, PRIORITY_STATUS_LIST, Goal } from "../../../../models/goal";
+import { Goal, GOAL_STATUS_LIST, GoalData, PRIORITY_STATUS_LIST } from "../../../../models/goal";
 import { BehaviorSubject, finalize, Observable } from "rxjs";
 import { GoalsService } from "../../../../services/goals.service";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { getErrors, prepareDate, setErrorToForm } from "../../../shared/helpers/form";
+import { prepareDate } from "../../../shared/helpers/form";
 import { CategoriesService } from "../../../../services/categories.service";
+import { BoardsService } from "../../../../services/boards.service";
 
 @UntilDestroy()
 @Component({
@@ -40,6 +41,7 @@ export class GoalEditComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<undefined>,
     private categoriesService: CategoriesService,
+    private boardsService: BoardsService,
   ) {
   }
 
@@ -64,14 +66,7 @@ export class GoalEditComponent implements OnInit {
       });
       this.dialogRef.close();
     }, http => {
-      const errors = getErrors(http);
-      setErrorToForm(this.form, errors.apiErrors);
-
-      errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
-      });
-
-      this.formValidatorService.update();
+      this.formValidatorService.setErrors(http, this.form);
     })
   }
 

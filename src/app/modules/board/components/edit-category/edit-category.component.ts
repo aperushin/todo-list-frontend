@@ -7,6 +7,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Category } from "../../../../models/categories";
 import { map, Observable, tap } from "rxjs";
+import { BoardsService } from "../../../../services/boards.service";
 
 @Component({
   selector: 'app-edit-category',
@@ -17,29 +18,29 @@ import { map, Observable, tap } from "rxjs";
 })
 export class EditCategoryComponent implements OnInit {
   form = new FormGroup({
-    title: new FormControl('')
+    title: new FormControl(''),
+    board: new FormControl('')
   });
-
-  private category?: Category;
+  boards$ = this.boardsService.boards$;
 
   constructor(
     private categoriesService: CategoriesService,
     private formValidatorService: FormValidatorService,
     private snackBar: MatSnackBar,
+    private boardsService: BoardsService,
     private dialogRef: MatDialogRef<undefined>,
-    @Inject(MAT_DIALOG_DATA) public data?: Category
+    @Inject(MAT_DIALOG_DATA) public category?: Category
   ) {
   }
 
   ngOnInit(): void {
-    if (this.data) {
-      this.category = this.data;
+    if (this.category) {
       this.form.patchValue(this.category);
     }
   }
 
   save(): void {
-    (this.category ? this.update() : this.create())
+    (this.category?.id ? this.update() : this.create())
       .subscribe(
         message => {
           this.snackBar.open(message, undefined, {
@@ -48,14 +49,7 @@ export class EditCategoryComponent implements OnInit {
           this.dialogRef.close();
         },
         http => {
-          const errors = getErrors(http);
-          setErrorToForm(this.form, errors.apiErrors);
-
-          errors.nonFieldErrors.forEach(error => {
-            this.snackBar.open(error, 'Закрыть');
-          });
-
-          this.formValidatorService.update();
+          this.formValidatorService.setErrors(http, this.form);
         }
       )
   }

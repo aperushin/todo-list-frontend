@@ -25,7 +25,7 @@ export class GoalsApiService {
   }
 
   updateGoal(form: GoalData, id: number): Observable<Goal> {
-    return this.httpClient.patch<Goal>(environment.apiEndpoint + 'goals/goal/' + id, form);
+    return this.httpClient.put<Goal>(environment.apiEndpoint + 'goals/goal/' + id, form);
   }
 
   loadGoals(form: GoalsRequest): Observable<ResultPage<Goal>> {

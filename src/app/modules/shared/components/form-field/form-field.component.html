@@ -4,21 +4,36 @@
     <input
       *ngSwitchCase="'input'"
       matInput
+      [disabled]="disabled"
       [placeholder]="placeholder"
       [formControl]="control"
     >
     <textarea
       *ngSwitchCase="'textarea'"
       matInput
+      [disabled]="disabled"
       [placeholder]="placeholder"
       [formControl]="control"
       (keydown.control.Enter)="submit.next()"
     ></textarea>
 
-    <mat-select *ngSwitchCase="'select'" [formControl]="control" [multiple]="multiple">
-      <mat-option *ngFor="let item of selectList" [value]="item.id">
-        {{ item.title }}
-      </mat-option>
+    <mat-select
+      *ngSwitchCase="'select'"
+      [formControl]="control"
+      [multiple]="multiple"
+      [disabled]="disabled"
+    >
+      <ng-container
+        *ngFor="let item of selectList"
+      >
+        <mat-option
+          *ngIf="!item.isBlocked || control.value === item.id"
+          [value]="item.id"
+          [disabled]="item.isBlocked"
+        >
+          {{ item.title }}
+        </mat-option>
+      </ng-container>
     </mat-select>
 
     <div *ngSwitchCase="'date'" class="date-input">

@@ -47,6 +47,9 @@ import { GoalDetailComponent } from './modules/board/components/goal-detail/goal
 import { MatMenuModule } from "@angular/material/menu";
 import { CommentComponent } from './modules/board/components/comment/comment.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { BoardsComponent } from './modules/board/components/boards/boards.component';
+import { BoardEditComponent } from './modules/board/components/board-edit/board-edit.component';
+import { ParticipantsComponent } from './modules/shared/components/participants/participants.component';
 
 const MY_FORMATS = {
   parse: {
@@ -80,6 +83,9 @@ const MY_FORMATS = {
     GoalCardComponent,
     GoalDetailComponent,
     CommentComponent,
+    BoardsComponent,
+    BoardEditComponent,
+    ParticipantsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

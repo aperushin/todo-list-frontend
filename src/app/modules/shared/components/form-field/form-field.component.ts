@@ -26,6 +26,7 @@ export class FormFieldComponent {
   @Input() type: 'input' | 'textarea' | 'select' | 'date' = 'input';
   @Input() selectList!: Entity[];
   @Input() multiple = false;
+  @Input() disabled = false;
 
   @Output() submit = new EventEmitter<void>();
 

@@ -1,10 +1,10 @@
 {
   "/core": {
-    "target": "http://51.250.28.87",
+    "target": "http://51.250.28.87/",
     "secure": false
   },
   "/goals": {
-    "target": "http://51.250.28.87",
+    "target": "http://51.250.28.87/",
     "secure": false
   }
 }

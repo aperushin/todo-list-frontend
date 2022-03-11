@@ -21,11 +21,11 @@ export class CategoryApiService {
   }
 
   createCategory(form: CategoryRequest): Observable<Category> {
-    return this.httpClient.post<Category>(environment.apiEndpoint + 'goals/goal_category/create', form);
+    return this.httpClient.post<Category>(environment.apiEndpoint + 'goals/goal_category.create', form);
   }
 
   updateCategory(form: CategoryRequest, id: number): Observable<Category> {
-    return this.httpClient.patch<Category>(environment.apiEndpoint + 'goals/goal_category/' + id, form);
+    return this.httpClient.put<Category>(environment.apiEndpoint + 'goals/goal_category/' + id, form);
   }
 
   deleteCategory(id: number): Observable<void> {

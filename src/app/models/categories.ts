@@ -22,6 +22,7 @@ export enum CategoriesOrderField {
 }
 
 export interface CategoriesRequest {
+  board: number;
   ordering?: string;
   search: string;
   limit: number;

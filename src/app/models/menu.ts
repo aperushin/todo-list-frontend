@@ -11,4 +11,10 @@ export interface DynamicMenu extends Route {
   getPath: (injector: Injector) => Observable<string | null>;
 }
 
+export interface MenuSeparator {
+  isSeparator: true;
+}
+
+export type MenuView = Menu | MenuSeparator;
+
 export type Menu = StaticMenu | DynamicMenu;

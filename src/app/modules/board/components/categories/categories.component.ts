@@ -4,15 +4,18 @@ import { EditCategoryComponent } from "../edit-category/edit-category.component"
 import { DataSource } from "../../../../services/data-source";
 import { Category, CategoryWithDetails } from "../../../../models/categories";
 import { DataSourceQuery, ResultPage } from "../../../../models/page";
-import { debounceTime, Observable } from "rxjs";
+import { debounceTime, map, Observable } from "rxjs";
 import { CategoriesService } from "../../../../services/categories.service";
 import { Sort } from "@angular/material/sort";
 import { FormControl } from "@angular/forms";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute } from "@angular/router";
+import { BoardsService } from "../../../../services/boards.service";
 
 interface SearchForm {
   search: string;
+  board: number;
 }
 
 @UntilDestroy()
@@ -27,14 +30,22 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   dataSource: DataSource<Category, SearchForm>;
   isLoading$: Observable<boolean>;
   searchControl = new FormControl('');
+  boards$ = this.boardsService.boards$.pipe(
+    map(list => ([{ id: '', title: 'Все' }, ...list]))
+  );
 
   constructor(
     private dialog: MatDialog,
     private categoriesService: CategoriesService,
     private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
+    private boardsService: BoardsService,
   ) {
+    const board = this.activatedRoute.snapshot.params?.boardId;
+
     this.dataSource = new DataSource<Category, SearchForm>({
         search: '',
+        board: board ? parseInt(board) : '',
       },
       this.loadCategories.bind(this),
       this.categoriesService.reload$,
@@ -43,7 +54,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   addCategory(): void {
-    this.dialog.open(EditCategoryComponent);
+    const board = this.dataSource.searchForm.get('board')!.value;
+    this.dialog.open(EditCategoryComponent, {
+      data: {
+        board: board ? parseInt(board) : null,
+      }
+    });
   }
 
   editCategory(category: Category): void {
@@ -81,6 +97,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     return this.categoriesService.loadCategories({
       offset: query.offset,
       limit: query.limit,
+      board: query.search.board,
       ordering: query.orderField,
       search: query.search.search,
     });

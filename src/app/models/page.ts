@@ -5,6 +5,11 @@ export interface ResultPage<T> {
   results: T[];
 }
 
+export interface ListQuery {
+  limit: number;
+  offset: number;
+}
+
 export interface DataSourceQuery<Form = {}> {
   search: Form;
   offset: number;

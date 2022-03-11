@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { MENU } from "../../../../routing/menu";
 import { DynamicMenu, Menu, MenuSeparator, MenuView, StaticMenu } from "../../../../models/menu";
+import { MatDialog } from "@angular/material/dialog";
+import { BotVerificationComponent } from "../../../board/components/bot-verification/bot-verification.component";
 
 @Component({
   selector: 'app-menu',
@@ -25,11 +27,16 @@ export class MenuComponent {
 
   constructor(
     public injector: Injector,
+    private dialog: MatDialog,
   ) {
   }
 
   prepareName(name: string): string {
     return name.replace('<sub>', '<i class="material-icons">subdirectory_arrow_right</i>')
+  }
+
+  openVerification(): void {
+    this.dialog.open(BotVerificationComponent);
   }
 
 }

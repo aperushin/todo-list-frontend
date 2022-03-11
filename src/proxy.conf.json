@@ -6,5 +6,9 @@
   "/goals": {
     "target": "http://51.250.28.87/",
     "secure": false
+  },
+  "/bot": {
+    "target": "http://51.250.28.87/",
+    "secure": false
   }
 }

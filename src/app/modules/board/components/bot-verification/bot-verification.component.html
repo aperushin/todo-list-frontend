@@ -1,0 +1,12 @@
+<form class="root" [formGroup]="form" (submit)="save()">
+  <app-form-field
+    placeholder="Код"
+    [control]="form.get('verification_code')"
+  ></app-form-field>
+
+  <div *ngIf="isLoading$ | async" class="spinner-absolute">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <button class="save-button" mat-raised-button color="primary">Сохранить</button>
+</form>

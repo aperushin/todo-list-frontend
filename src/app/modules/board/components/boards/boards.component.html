@@ -58,7 +58,13 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> Редактировать </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" (click)="editBoard(element)">Редактировать</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="editBoard(element)"
+        >
+          Редактировать
+        </button>
       </td>
     </ng-container>
 

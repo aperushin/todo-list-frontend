@@ -6,6 +6,7 @@ export interface Category {
   updated: string;
   title: string;
   is_deleted: boolean;
+  board: number;
 }
 
 export interface CategoryRequest {

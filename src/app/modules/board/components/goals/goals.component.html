@@ -25,14 +25,6 @@
 
     <app-form-field
       class="field"
-      [control]="dataSource?.searchForm.get('board')"
-      placeholder="Доска"
-      type="select"
-      [selectList]="boards$ | async"
-    ></app-form-field>
-
-    <app-form-field
-      class="field"
       [control]="dataSource?.searchForm.get('priority__in')"
       placeholder="Приоритет"
       type="select"

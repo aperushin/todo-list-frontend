@@ -19,7 +19,10 @@ export function setErrorToControl(control: AbstractControl, errors: string[]): v
   control.setErrors(errorMap, { emitEvent: true });
 }
 
-export function getErrors(httpError: HttpErrorResponse): { nonFieldErrors: string[], apiErrors: ApiErrors } {
+export function getErrors(
+  httpError: HttpErrorResponse,
+  availableKeys: string[] | null = null,
+): { nonFieldErrors: string[], apiErrors: ApiErrors } {
   if (httpError.status === 500) {
     return {
       apiErrors: {},
@@ -29,6 +32,14 @@ export function getErrors(httpError: HttpErrorResponse): { nonFieldErrors: strin
 
   const { non_field_errors, detail, ...apiErrors } = httpError.error;
   const nonFieldErrors = non_field_errors || [];
+
+  if (availableKeys) {
+    Object.entries(apiErrors)
+      .filter(([key, value]) => !availableKeys.includes(key))
+      .forEach(([key, value]) => {
+        nonFieldErrors.push(...(value as string[]))
+      })
+  }
 
   if (detail) {
     nonFieldErrors.push(detail);

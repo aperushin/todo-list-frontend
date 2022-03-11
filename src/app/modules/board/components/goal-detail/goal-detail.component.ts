@@ -13,6 +13,7 @@ import { DataSource } from "../../../../services/data-source";
 import { DataSourceQuery, ResultPage } from "../../../../models/page";
 import { CommentDTO } from "../../../../models/comment";
 import { Entity } from "../../../../models/base";
+import { UserService } from "../../../../services/user.service";
 
 @Component({
   selector: 'app-goal-detail',
@@ -23,6 +24,7 @@ import { Entity } from "../../../../models/base";
 })
 export class GoalDetailComponent implements OnInit {
   goal$: Observable<GoalWithDetails>;
+  user$ = this.userService.user$;
   commentControl = new FormControl('');
   dataSource?: DataSource<CommentDTO>;
   commentList$: Observable<CommentDTO[]>;
@@ -43,6 +45,7 @@ export class GoalDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private commentsService: CommentsService,
     private formValidatorService: FormValidatorService,
+    private userService: UserService,
   ) {
     this.goal$ = this.goalsService.loadGoal(this.goalId).pipe(
       shareReplay({ refCount: true, bufferSize: 1 }),
@@ -84,7 +87,8 @@ export class GoalDetailComponent implements OnInit {
       });
       this.commentControl.patchValue('');
     }, http => {
-      const errors = getErrors(http);
+      const errors = getErrors(http, ['text']);
+
       if (errors.apiErrors?.text) {
         setErrorToControl(this.commentControl, errors.apiErrors.text);
       }

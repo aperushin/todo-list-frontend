@@ -18,6 +18,7 @@ import { format } from "date-fns";
 })
 export class CommentComponent implements OnChanges {
   @Input() comment: CommentDTO;
+  @Input() editAvailable = true;
 
   @Output() delete = new EventEmitter<void>();
 

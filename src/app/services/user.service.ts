@@ -29,10 +29,14 @@ export class UserService {
     );
   }
 
-  logout(): void {
-    this.user.next(null);
-    this.cookieService.deleteAll();
-    this.router.navigateByUrl('/auth');
+  logout(): Observable<boolean> {
+    return this.userApiService.logout().pipe(
+      switchMap(() => {
+        this.user.next(null);
+        this.cookieService.deleteAll();
+        return this.router.navigateByUrl('/auth');
+      })
+    );
   }
 
   signUp(form: UserRegistration): Observable<void> {

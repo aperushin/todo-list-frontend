@@ -30,6 +30,10 @@ export class UserApiService {
     return this.httpClient.post<User>(environment.apiEndpoint + 'core/login', form);
   }
 
+  logout(): Observable<void> {
+    return this.httpClient.delete<void>(environment.apiEndpoint + 'core/profile', {})
+  }
+
   updatePassword(form: UpdatePasswordRequest): Observable<void> {
     return this.httpClient.patch<void>(environment.apiEndpoint + 'core/update_password', form);
   }

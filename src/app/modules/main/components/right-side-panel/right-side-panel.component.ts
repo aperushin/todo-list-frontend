@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getInitials } from 'src/app/modules/shared/helpers/get-initials';
 import { UserService } from "../../../../services/user.service";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'app-right-side-panel',
   templateUrl: './right-side-panel.component.html',
@@ -18,6 +20,8 @@ export class RightSidePanelComponent {
   }
 
   logout(): void {
-    this.userService.logout();
+    this.userService.logout().pipe(
+      untilDestroyed(this)
+    ).subscribe();
   }
 }

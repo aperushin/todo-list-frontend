@@ -23,7 +23,7 @@ export function getErrors(
   httpError: HttpErrorResponse,
   availableKeys: string[] | null = null,
 ): { nonFieldErrors: string[], apiErrors: ApiErrors } {
-  if (httpError.status === 403) {
+  if (httpError.status === 403 && !httpError?.error) {
     return {
       apiErrors: {},
       nonFieldErrors: ['Forbidden']

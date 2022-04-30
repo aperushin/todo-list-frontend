@@ -77,6 +77,7 @@ export class UserService {
         username: user!.username,
         password: form.new_password,
       })),
+      map(() => {}),
     );
   }
 

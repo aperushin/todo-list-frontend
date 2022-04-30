@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: '/',
+  apiEndpoint: '/api/',
   vkAuthLink: 'http://skypro-flask-app-malenko.ga/oauth/login/vk-oauth2',
 };
 

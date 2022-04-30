@@ -1,14 +1,14 @@
 {
-  "/core": {
-    "target": "http://51.250.28.87/",
+  "/api/core": {
+    "target": "http://51.250.106.88",
     "secure": false
   },
-  "/goals": {
-    "target": "http://51.250.28.87/",
+  "/api/goals": {
+    "target": "http://51.250.106.88",
     "secure": false
   },
-  "/bot": {
-    "target": "http://51.250.28.87/",
+  "/api/bot": {
+    "target": "http://51.250.106.88/",
     "secure": false
   }
 }

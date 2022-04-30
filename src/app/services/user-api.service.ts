@@ -35,6 +35,6 @@ export class UserApiService {
   }
 
   updatePassword(form: UpdatePasswordRequest): Observable<void> {
-    return this.httpClient.patch<void>(environment.apiEndpoint + 'core/update_password', form);
+    return this.httpClient.put<void>(environment.apiEndpoint + 'core/update_password', form);
   }
 }

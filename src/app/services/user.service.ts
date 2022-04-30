@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
 import { UpdatePasswordRequest, User, UserData, UserLogin, UserRegistration } from '../models/user';
 import { UserApiService } from './user-api.service';
 import { Router } from '@angular/router';
@@ -71,7 +71,13 @@ export class UserService {
   }
 
   updatePassword(form: UpdatePasswordRequest): Observable<void> {
-    return this.userApiService.updatePassword(form);
+    return this.userApiService.updatePassword(form).pipe(
+      withLatestFrom(this.user$),
+      switchMap(([_, user]) => this.login({
+        username: user!.username,
+        password: form.new_password,
+      })),
+    );
   }
 
   private generateToken(username: string, password: string): string {

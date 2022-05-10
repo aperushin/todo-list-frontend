@@ -12,6 +12,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute } from "@angular/router";
 import { BoardsService } from "../../../../services/boards.service";
+import { getErrors } from "../../../shared/helpers/form";
 
 interface SearchForm {
   search: string;
@@ -73,6 +74,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       this.snackBar.open('Категория удалена', 'Закрыть', {
         duration: 2000
       })
+    }, httpError => {
+      const errors = getErrors(httpError);
+      errors.nonFieldErrors.forEach(error => {
+        this.snackBar.open(error, 'Закрыть');
+      });
     });
   }
 

@@ -1,10 +1,10 @@
 {
   "/api/core": {
-    "target": "http://51.250.106.88",
+    "target": "http://51.250.106.88:8037",
     "secure": false
   },
   "/api/goals": {
-    "target": "http://51.250.106.88",
+    "target": "http://51.250.106.88:8037",
     "secure": false
   },
   "/api/bot": {

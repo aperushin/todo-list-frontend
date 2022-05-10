@@ -7,6 +7,8 @@ import { DataSourceQuery, ResultPage } from "../../../../models/page";
 import { MatDialog } from "@angular/material/dialog";
 import { BoardEditComponent } from "../board-edit/board-edit.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { getErrors } from "../../../shared/helpers/form";
 
 @UntilDestroy()
 @Component({
@@ -22,6 +24,7 @@ export class BoardsComponent implements OnInit {
 
   constructor(
     private boardsService: BoardsService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) {
   }
@@ -56,7 +59,18 @@ export class BoardsComponent implements OnInit {
   }
 
   deleteBoard(board: Board): void {
-
+    this.boardsService.delete(board.id).pipe(
+      untilDestroyed(this),
+    ).subscribe(() => {
+      this.snackBar.open('Доска удалена', 'Закрыть', {
+        duration: 2000
+      });
+    }, httpError => {
+      const errors = getErrors(httpError);
+      errors.nonFieldErrors.forEach(error => {
+        this.snackBar.open(error, 'Закрыть');
+      });
+    });
   }
 
 }

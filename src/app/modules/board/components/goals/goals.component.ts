@@ -3,7 +3,7 @@ import { Goal, GOAL_STATUS_LIST, GoalStatus, PRIORITY_STATUS_LIST } from "../../
 import { CurrentCategoryService } from "../../../../services/current-category.service";
 import { MatDialog } from "@angular/material/dialog";
 import { GoalEditComponent } from "../goal-edit/goal-edit.component";
-import { BehaviorSubject, debounceTime, filter, map, Observable, shareReplay, switchMap, take } from "rxjs";
+import { BehaviorSubject, debounceTime, filter, map, Observable, of, shareReplay, switchMap, take } from "rxjs";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { DataSource } from "../../../../services/data-source";
 import { DataSourceQuery, ResultPage } from "../../../../models/page";
@@ -213,6 +213,15 @@ export class GoalsComponent implements OnDestroy, OnInit {
   }
 
   private loadGoals(query: DataSourceQuery<SearchForm>): Observable<ResultPage<Goal>> {
+    if (!query.search.category__in || !query.search.category__in.length) {
+      return of({
+        count: 0,
+        next: null,
+        previous: null,
+        results: []
+      })
+    }
+
     return this.goalsService.loadGoals({
       offset: query.offset,
       limit: 300,

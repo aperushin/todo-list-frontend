@@ -136,12 +136,6 @@ export class GoalsComponent implements OnDestroy, OnInit {
         goal,
         boardId: boardId ? parseInt(boardId) : null,
       },
-      ...(!doomRect ? {} : {
-        position: {
-          top: Math.min(doomRect.top + 50, maxTop) + 'px',
-          left: doomRect.left + 'px'
-        }
-      })
     });
   }
 

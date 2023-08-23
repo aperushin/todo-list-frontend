@@ -18,7 +18,7 @@ import { BehaviorSubject, finalize } from "rxjs";
 })
 export class LoginComponent {
   isLoading$ = new BehaviorSubject<boolean>(false);
-  vkAuthLink = this.userService.vkAuthLink;
+  googleAuthLink = this.userService.googleAuthLink;
   form = this.fb.group({
     username: '',
     password: '',

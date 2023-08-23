@@ -1,37 +1,37 @@
 <form class="form" [formGroup]="form" (submit)="save()">
   <app-form-field
-    placeholder="Название"
+    placeholder="Title"
     [control]="form.get('title')"
   ></app-form-field>
 
   <app-form-field
-    placeholder="Описание"
+    placeholder="Description"
     [control]="form.get('description')"
     type="textarea"
   ></app-form-field>
 
   <app-form-field
-    placeholder="Дата дедлайна"
+    placeholder="Deadline"
     [control]="form.get('due_date')"
     type="date"
   ></app-form-field>
 
   <app-form-field
-    placeholder="Статус"
+    placeholder="Status"
     [control]="form.get('status')"
     type="select"
     [selectList]="statusList"
   ></app-form-field>
 
   <app-form-field
-    placeholder="Приоритет"
+    placeholder="Priority"
     [control]="form.get('priority')"
     type="select"
     [selectList]="priorityList"
   ></app-form-field>
 
   <app-form-field
-    placeholder="Категория"
+    placeholder="Category"
     [control]="form.get('category')"
     type="select"
     [selectList]="categories$ | async"
@@ -41,5 +41,5 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <button mat-raised-button color="primary">Сохранить</button>
+  <button mat-raised-button color="primary">Save</button>
 </form>

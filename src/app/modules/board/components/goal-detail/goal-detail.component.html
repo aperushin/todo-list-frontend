@@ -15,11 +15,11 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onDelete()">
             <mat-icon>restore_from_trash</mat-icon>
-            Удалить
+            Delete
           </button>
           <button mat-menu-item (click)="onEdit()">
             <mat-icon>edit</mat-icon>
-            Редактировать
+            Edit
           </button>
         </mat-menu>
       </span>
@@ -29,40 +29,40 @@
       {{ goal.title }}
     </div>
     <div class="description" [class.-placeholder]="!goal.description">
-      {{ goal.description || 'Описание' }}
+      {{ goal.description || 'Description' }}
     </div>
 
     <div class="container">
       <div class="content">
         <div class="info">
           <div class="field">
-            <span class="name">Дедлайн</span>
+            <span class="name">Deadline</span>
             <span class="value">{{ goal.due_date ? (goal.due_date | date : 'dd.MM.YYYY' ) : '-' }}</span>
           </div>
           <div class="field">
-            <span class="name">Создана</span>
+            <span class="name">Created</span>
             <span class="value">{{ goal.created | date : 'dd.MM.YYYY HH:mm' }}</span>
           </div>
           <div class="field">
-            <span class="name">Обновлена</span>
+            <span class="name">Updated</span>
             <span class="value">{{ goal.updated | date : 'dd.MM.YYYY HH:mm' }}</span>
           </div>
           <div class="field">
-            <span class="name">Статус</span>
+            <span class="name">Status</span>
             <span class="value">{{ goal.status.title }}</span>
           </div>
           <div class="field">
-            <span class="name">Приоритет</span>
+            <span class="name">Priority</span>
             <span class="value">{{ goal.priority.title }}</span>
           </div>
           <div class="field">
-            <span class="name">Категория</span>
+            <span class="name">Category</span>
             <span class="value">{{ goal.category.title }}</span>
           </div>
         </div>
 
         <div class="separator">
-          Комментарии
+          Comments
         </div>
 
         <div class="comments-container">
@@ -93,8 +93,8 @@
 
         <form class="comment-form" (submit)="addComment()">
           <app-form-field
-            placeholder="Комментарий, можно отправить нажав ctrl + enter"
-            label="Комментарий"
+            placeholder="Press ctrl + enter to publish comment"
+            label="Comment"
             type="textarea"
             [control]="commentControl"
             (submit)="addComment()"
@@ -104,7 +104,7 @@
             color="primary"
             class="add-button"
           >
-            Добавить
+            Add
           </button>
         </form>
       </div>

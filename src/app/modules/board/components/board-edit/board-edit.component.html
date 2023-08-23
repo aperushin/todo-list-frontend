@@ -1,6 +1,6 @@
 <form class="root" [formGroup]="form" (submit)="save()">
   <app-form-field
-    placeholder="Название"
+    placeholder="Title"
     [control]="form.get('title')"
   ></app-form-field>
 
@@ -13,5 +13,5 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <button class="save-button" mat-raised-button color="primary">Сохранить</button>
+  <button class="save-button" mat-raised-button color="primary">Save</button>
 </form>

@@ -7,7 +7,7 @@
       <div class="user-name">{{ comment.user.first_name || comment.user.username }}</div>
       <div
         class="date"
-        [matTooltip]="'Дата редактирования: ' + (comment.updated | date : 'dd.MM.YYYY HH:mm')"
+        [matTooltip]="'Last updated: ' + (comment.updated | date : 'dd.MM.YYYY HH:mm')"
         [matTooltipDisabled]="!isUpdated"
       >
         {{ comment.created | date : 'dd.MM.YYYY HH:mm' }}
@@ -33,7 +33,7 @@
         class="update-button"
         (click)="updateComment()"
       >
-        Сохранить
+        Save
       </button>
     </ng-container>
   </div>
@@ -42,7 +42,7 @@
       class="control-btn"
       mat-icon-button
       tabindex="-1"
-      matTooltip="Удалить"
+      matTooltip="Delete"
       (click)="delete.emit()"
     >
       <mat-icon>restore_from_trash</mat-icon>
@@ -51,7 +51,7 @@
       class="control-btn"
       mat-icon-button
       tabindex="-1"
-      matTooltip="Редактировать"
+      matTooltip="Edit"
       (click)="isEditMode = !isEditMode"
     >
       <mat-icon>edit</mat-icon>

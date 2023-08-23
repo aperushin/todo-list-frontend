@@ -3,13 +3,13 @@
     <app-form-field
       class="field -search"
       [control]="searchControl"
-      placeholder="Название"
+      placeholder="Title"
     ></app-form-field>
 
     <app-form-field
       class="field"
       [control]="orderControl"
-      placeholder="Сортировка"
+      placeholder="Sort"
       type="select"
       [selectList]="orderList"
     ></app-form-field>
@@ -17,7 +17,7 @@
     <app-form-field
       class="field"
       [control]="dataSource?.searchForm.get('category__in')"
-      placeholder="Категории"
+      placeholder="Categories"
       type="select"
       [selectList]="categories$ | async"
       [multiple]="true"
@@ -26,7 +26,7 @@
     <app-form-field
       class="field"
       [control]="dataSource?.searchForm.get('priority__in')"
-      placeholder="Приоритет"
+      placeholder="Priority"
       type="select"
       [selectList]="priorityList"
       [multiple]="true"
@@ -35,7 +35,7 @@
     <app-form-field
       class="field"
       [control]="dataSource?.searchForm.get('status__in')"
-      placeholder="Статус"
+      placeholder="Status"
       type="select"
       [selectList]="statusList"
       [multiple]="true"
@@ -43,15 +43,15 @@
 
     <app-form-field
       class="field -date"
-      [control]="dataSource?.searchForm.get('due_date__lte')"
-      placeholder="Дедлайн с"
+      [control]="dataSource?.searchForm.get('due_date__gte')"
+      placeholder="Deadline from"
       type="date"
     ></app-form-field>
 
     <app-form-field
       class="field -date"
-      [control]="dataSource?.searchForm.get('due_date__gte')"
-      placeholder="Дедлайн до"
+      [control]="dataSource?.searchForm.get('due_date__lte')"
+      placeholder="Deadline up to"
       type="date"
     ></app-form-field>
   </div>
@@ -94,7 +94,7 @@
           (click)="addGoal(status.id, button)"
         >
           <mat-icon class="add-icon">add</mat-icon>
-          Добавить цель
+          Add goal
         </button>
       </div>
     </div>

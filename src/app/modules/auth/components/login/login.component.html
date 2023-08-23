@@ -1,7 +1,7 @@
 <form class="login" [formGroup]="form" (submit)="onSend()">
   <div class="line">
-    <a [href]="vkAuthLink">
-      <button mat-raised-button type="button">Продолжить через VK</button>
+    <a [href]="googleAuthLink">
+      <button mat-raised-button type="button">Continue with Google</button>
     </a>
   </div>
 
@@ -9,19 +9,19 @@
 
   <app-form-field
     class="field"
-    [placeholder]="'Логин'"
+    [placeholder]="'Login'"
     [control]="form.get('username')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Пароль'"
+    [placeholder]="'Password'"
     [control]="form.get('password')"
   ></app-form-field>
 
   <div class="divider"></div>
 
-  <button mat-raised-button color="primary" type="submit">Авторизоваться</button>
+  <button mat-raised-button color="primary" type="submit">Login</button>
 
   <div *ngIf="isLoading$ | async" class="spinner-absolute">
     <mat-spinner></mat-spinner>

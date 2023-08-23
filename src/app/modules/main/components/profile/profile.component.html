@@ -1,19 +1,19 @@
 <form [formGroup]="formProfile" (submit)="updateProfile()">
   <app-form-field
     class="field"
-    [placeholder]="'Логин'"
+    [placeholder]="'Login'"
     [control]="formProfile.get('username')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Имя'"
+    [placeholder]="'Name'"
     [control]="formProfile.get('first_name')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Фамилия'"
+    [placeholder]="'Surname'"
     [control]="formProfile.get('last_name')"
   ></app-form-field>
 
@@ -23,7 +23,7 @@
     [control]="formProfile.get('email')"
   ></app-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Обновить профиль</button>
+  <button mat-raised-button color="primary" type="submit">Update profile</button>
 </form>
 
 <div class="divider"></div>
@@ -31,15 +31,15 @@
 <form [formGroup]="formPassword" (submit)="updatePassword()">
   <app-form-field
     class="field"
-    [placeholder]="'Старый пароль'"
+    [placeholder]="'Old password'"
     [control]="formPassword.get('old_password')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Новый пароль'"
+    [placeholder]="'New password'"
     [control]="formPassword.get('new_password')"
   ></app-form-field>
 
-  <button class="update-password-button" mat-raised-button color="primary" type="submit">Изменить пароль</button>
+  <button class="update-password-button" mat-raised-button color="primary" type="submit">Change password</button>
 </form>

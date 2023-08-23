@@ -13,7 +13,7 @@ export class UserService {
   private user = new BehaviorSubject<User | null>(null);
 
   user$: Observable<User | null>;
-  vkAuthLink = environment.vkAuthLink;
+  googleAuthLink = environment.googleAuthLink;
 
   constructor(
     private userApiService: UserApiService,

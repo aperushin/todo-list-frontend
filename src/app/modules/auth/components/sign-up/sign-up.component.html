@@ -1,19 +1,19 @@
 <form class="login" [formGroup]="form" (submit)="onSend()">
   <app-form-field
     class="field"
-    [placeholder]="'Логин'"
+    [placeholder]="'Login'"
     [control]="form.get('username')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Имя'"
+    [placeholder]="'Name'"
     [control]="form.get('first_name')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Фамилия'"
+    [placeholder]="'Surname'"
     [control]="form.get('last_name')"
   ></app-form-field>
 
@@ -27,19 +27,19 @@
 
   <app-form-field
     class="field"
-    [placeholder]="'Пароль'"
+    [placeholder]="'Password'"
     [control]="form.get('password')"
   ></app-form-field>
 
   <app-form-field
     class="field"
-    [placeholder]="'Повторите пароль'"
+    [placeholder]="'Repeat password'"
     [control]="form.get('password_repeat')"
   ></app-form-field>
 
   <div class="divider"></div>
 
-  <button mat-raised-button color="primary" type="submit">Регистрация</button>
+  <button mat-raised-button color="primary" type="submit">Create account</button>
 
   <div *ngIf="isLoading$ | async" class="spinner-absolute">
     <mat-spinner></mat-spinner>

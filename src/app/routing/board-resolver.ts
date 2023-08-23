@@ -31,7 +31,7 @@ export class BoardResolver implements Resolve<BoardDetails | null> {
       catchError(() => {
         this.router.navigateByUrl('/');
 
-        this.snackBar.open('Категория ' + id + ' не найдена!', 'Закрыть', {
+        this.snackBar.open('Category ' + id + ' not found!', 'Close', {
           duration: 2000
         })
 

@@ -18,9 +18,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 const GOAL_FORM_HEIGHT = 440;
 const BOTTOM_OFFSET = 350;
 const ORDER_FIELD_LIST = [
-  { id: '', title: 'По приоритету и дедлайну' },
-  { id: 'priority', title: 'По приоритету' },
-  { id: 'due_date', title: 'По дедлайну' },
+  { id: '', title: 'By priority and deadline' },
+  { id: 'priority', title: 'By priority' },
+  { id: 'due_date', title: 'By deadline' },
 ];
 
 interface SearchForm {

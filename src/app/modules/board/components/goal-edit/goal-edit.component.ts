@@ -70,7 +70,7 @@ export class GoalEditComponent implements OnInit {
       finalize(() => this.isLoading$.next(false)),
       untilDestroyed(this),
     ).subscribe(() => {
-      this.snackBar.open('Цель сохранена', 'Закрыть', {
+      this.snackBar.open('Goal saved', 'Close', {
         duration: 2000
       });
       this.dialogRef.close();

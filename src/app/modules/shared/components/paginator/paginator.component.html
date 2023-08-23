@@ -28,7 +28,7 @@
       <span>{{ page }}</span>
 
       <span *ngIf="dataSource?.totalPages$ | async as totalPages" class="total-page">
-        из {{ totalPages }}
+        of {{ totalPages }}
       </span>
     </div>
 

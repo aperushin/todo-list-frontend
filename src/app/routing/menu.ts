@@ -10,7 +10,7 @@ import { CurrentBoardService } from "../services/current-board.service";
 
 export const MENU: MenuView[] = [
   {
-    name: 'Доски',
+    name: 'Boards',
     path: 'boards',
     component: BoardsComponent,
     resolve: {
@@ -23,7 +23,7 @@ export const MENU: MenuView[] = [
     component: CategoriesComponent,
     getName: (injector) => {
       return injector.get(CurrentBoardService).board$.pipe(
-        map(item => item ? `<i></i> ${item.title} / Категории` : null)
+        map(item => item ? `<i></i> ${item.title} / Categories` : null)
       );
     },
     getPath: (injector) => {
@@ -44,7 +44,7 @@ export const MENU: MenuView[] = [
         injector.get(CurrentCategoryService).category$,
         injector.get(CurrentBoardService).board$
       ]).pipe(
-        map(([category, board]) => (category && board) ? `<i></i><i></i> ${board.title} / ${category.title} / Цели` : null)
+        map(([category, board]) => (category && board) ? `<i></i><i></i> ${board.title} / ${category.title} / Goals` : null)
       );
     },
     getPath: (injector) => {
@@ -65,7 +65,7 @@ export const MENU: MenuView[] = [
     component: GoalsComponent,
     getName: (injector) => {
       return injector.get(CurrentBoardService).board$.pipe(
-        map(item => item ? `<i></i> ${item.title} / Цели` : null)
+        map(item => item ? `<i></i> ${item.title} / Goals` : null)
       );
     },
     getPath: (injector) => {
@@ -82,7 +82,7 @@ export const MENU: MenuView[] = [
     isSeparator: true,
   },
   {
-    name: 'Все категории',
+    name: 'All categories',
     path: 'categories',
     component: CategoriesComponent,
     resolve: {
@@ -93,7 +93,7 @@ export const MENU: MenuView[] = [
   {
     path: 'categories/goals',
     component: GoalsComponent,
-    name: 'Все цели',
+    name: 'All goals',
     resolve: {
       category: CategoryResolver,
       board: BoardResolver,

@@ -56,13 +56,13 @@ export class EditCategoryComponent implements OnInit {
 
   private create(): Observable<string> {
     return this.categoriesService.createCategory(this.form.getRawValue()).pipe(
-      map(() => 'Категория создана')
+      map(() => 'Category created')
     );
   }
 
   private update(): Observable<string> {
     return this.categoriesService.updateCategory(this.form.getRawValue(), this.category!.id).pipe(
-      map(() => 'Категория сохранена')
+      map(() => 'Category saved')
     );
   }
 }

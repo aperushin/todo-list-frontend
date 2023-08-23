@@ -62,13 +62,13 @@ export class BoardsComponent implements OnInit {
     this.boardsService.delete(board.id).pipe(
       untilDestroyed(this),
     ).subscribe(() => {
-      this.snackBar.open('Доска удалена', 'Закрыть', {
+      this.snackBar.open('Board deleted', 'Close', {
         duration: 2000
       });
     }, httpError => {
       const errors = getErrors(httpError);
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
     });
   }

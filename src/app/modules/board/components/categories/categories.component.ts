@@ -32,7 +32,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   searchControl = new FormControl('');
   boards$ = this.boardsService.boards$.pipe(
-    map(list => ([{ id: '', title: 'Все' }, ...list]))
+    map(list => ([{ id: '', title: 'All' }, ...list]))
   );
 
   constructor(
@@ -71,13 +71,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   deleteCategory(category: Category): void {
     this.categoriesService.deleteCategory(category.id).subscribe(() => {
-      this.snackBar.open('Категория удалена', 'Закрыть', {
+      this.snackBar.open('Category deleted', 'Close', {
         duration: 2000
       })
     }, httpError => {
       const errors = getErrors(httpError);
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
     });
   }

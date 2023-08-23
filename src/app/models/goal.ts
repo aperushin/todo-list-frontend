@@ -38,16 +38,16 @@ export interface GoalWithDetails extends Omit<Goal, 'category' | 'priority' | 's
 }
 
 export const GOAL_STATUS_LIST: Entity<GoalStatus>[] = [
-  { id: GoalStatus.toDo, title: 'К выполнению' },
-  { id: GoalStatus.inProgress, title: 'В работе' },
-  { id: GoalStatus.done, title: 'Выполнено' },
+  { id: GoalStatus.toDo, title: 'To do' },
+  { id: GoalStatus.inProgress, title: 'In progress' },
+  { id: GoalStatus.done, title: 'Done' },
 ];
 
 export const PRIORITY_STATUS_LIST: Entity<GoalPriority>[] = [
-  { id: GoalPriority.low, title: 'Низкий' },
-  { id: GoalPriority.medium, title: 'Средний' },
-  { id: GoalPriority.high, title: 'Высокий' },
-  { id: GoalPriority.critical, title: 'Критический' },
+  { id: GoalPriority.low, title: 'Low' },
+  { id: GoalPriority.medium, title: 'Medium' },
+  { id: GoalPriority.high, title: 'High' },
+  { id: GoalPriority.critical, title: 'Critical' },
 ];
 
 export interface GoalsRequest {

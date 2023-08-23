@@ -40,11 +40,11 @@ class ViewParticipant implements Participant {
 const ROLES_LIST: Entity[] = [
   {
     id: ParticipantRole.write,
-    title: 'Редактор'
+    title: 'Editor'
   },
   {
     id: ParticipantRole.read,
-    title: 'Читатель'
+    title: 'Reader'
   }
 ];
 

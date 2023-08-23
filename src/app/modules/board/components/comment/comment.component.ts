@@ -59,7 +59,7 @@ export class CommentComponent implements OnChanges {
       setErrorToForm(this.form, errors.apiErrors);
 
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
 
       this.formValidatorService.update();

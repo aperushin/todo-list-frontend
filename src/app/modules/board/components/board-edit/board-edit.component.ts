@@ -60,13 +60,13 @@ export class BoardEditComponent implements OnInit {
 
   private create(): Observable<string> {
     return this.boardService.create(this.form.getRawValue()).pipe(
-      map(() => 'Доска создана')
+      map(() => 'Board created')
     );
   }
 
   private update(): Observable<string> {
     return this.boardService.update(this.form.getRawValue(), this.board!.id).pipe(
-      map(() => 'Доска сохранена')
+      map(() => 'Board saved')
     );
   }
 

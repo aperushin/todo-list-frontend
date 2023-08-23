@@ -30,7 +30,7 @@ export class CategoryResolver implements Resolve<Category | null> {
       catchError(() => {
         this.router.navigateByUrl('/');
 
-        this.snackBar.open('Категория ' + catId + ' не найдена!', 'Закрыть', {
+        this.snackBar.open('Category ' + catId + ' not found!', 'Close', {
           duration: 2000
         })
 

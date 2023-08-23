@@ -45,13 +45,13 @@ export class ProfileComponent implements OnInit {
   updateProfile(): void {
     this.snackBar.dismiss();
     this.userService.updateUser(this.formProfile.getRawValue()).subscribe(
-      () => this.snackBar.open('Успешно обновлён', 'Закрыть', { duration: 2000 }),
+      () => this.snackBar.open('Successfully updated', 'Close', { duration: 2000 }),
       error => {
         const errors = getErrors(error);
         setErrorToForm(this.formProfile, errors.apiErrors);
 
         errors.nonFieldErrors.forEach(error => {
-          this.snackBar.open(error, 'Закрыть');
+          this.snackBar.open(error, 'Close');
         })
 
         this.formValidatorService.update();
@@ -62,13 +62,13 @@ export class ProfileComponent implements OnInit {
   updatePassword(): void {
     this.snackBar.dismiss();
     this.userService.updatePassword(this.formPassword.getRawValue()).subscribe(
-      () => this.snackBar.open('Успешно обновлён', 'Закрыть', { duration: 2000 }),
+      () => this.snackBar.open('Successfully updated', 'Close', { duration: 2000 }),
       error => {
         const errors = getErrors(error);
         setErrorToForm(this.formPassword, errors.apiErrors);
 
         errors.nonFieldErrors.forEach(error => {
-          this.snackBar.open(error, 'Закрыть');
+          this.snackBar.open(error, 'Close');
         })
 
         this.formValidatorService.update();

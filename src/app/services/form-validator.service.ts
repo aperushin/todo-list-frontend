@@ -23,7 +23,7 @@ export class FormValidatorService {
     setErrorToForm(form, errors.apiErrors);
 
     errors.nonFieldErrors.forEach(error => {
-      this.snackBar.open(error, 'Закрыть');
+      this.snackBar.open(error, 'Close');
     });
 
     this.update();

@@ -30,9 +30,9 @@ export class GoalDetailComponent implements OnInit {
   commentList$: Observable<CommentDTO[]>;
   isLoadingComment$: Observable<boolean>;
   commentOrderFields: Entity[] = [
-    { id: '', title: 'Сначала новые' },
-    { id: 'created', title: 'Сначала старые' },
-    { id: 'updated', title: 'Недавно изменённые' }
+    { id: '', title: 'New first' },
+    { id: 'created', title: 'Old first' },
+    { id: 'updated', title: 'Recently updated' }
   ];
 
   private isLoadingAddComment$ = new BehaviorSubject<boolean>(false);
@@ -50,7 +50,7 @@ export class GoalDetailComponent implements OnInit {
     this.goal$ = this.goalsService.loadGoal(this.goalId).pipe(
       shareReplay({ refCount: true, bufferSize: 1 }),
       catchError((error) => {
-        this.snackBar.open('Цель не найдена', 'Закрыть', {
+        this.snackBar.open('Goal not found', 'Close', {
           duration: 2000,
         });
 
@@ -82,7 +82,7 @@ export class GoalDetailComponent implements OnInit {
     }).pipe(
       finalize(() => this.isLoadingAddComment$.next(false)),
     ).subscribe(() => {
-      this.snackBar.open('Комментарий добавлен', 'Закрыть', {
+      this.snackBar.open('Comment added', 'Close', {
         duration: 2000
       });
       this.commentControl.patchValue('');
@@ -94,7 +94,7 @@ export class GoalDetailComponent implements OnInit {
       }
 
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
 
       this.formValidatorService.update();
@@ -106,14 +106,14 @@ export class GoalDetailComponent implements OnInit {
     this.commentsService.deleteComment(comment.id).pipe(
       finalize(() => this.isLoadingAddComment$.next(false)),
     ).subscribe(() => {
-      this.snackBar.open('Комментарий удалён', 'Закрыть', {
+      this.snackBar.open('Comment deleted', 'Close', {
         duration: 2000
       });
     }, http => {
       const errors = getErrors(http);
 
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
     })
   }

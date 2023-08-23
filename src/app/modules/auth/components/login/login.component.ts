@@ -41,7 +41,7 @@ export class LoginComponent {
       untilDestroyed(this),
     ).subscribe(() => {
       this.router.navigateByUrl('/');
-      this.snackBar.open('Успешная авторизация', 'Закрыть', {
+      this.snackBar.open('Success', 'Close', {
         duration: 2000
       });
     }, error => {
@@ -50,7 +50,7 @@ export class LoginComponent {
       setErrorToForm(this.form, errors.apiErrors);
 
       errors.nonFieldErrors.forEach(error => {
-        this.snackBar.open(error, 'Закрыть');
+        this.snackBar.open(error, 'Close');
       });
 
       this.formValidatorService.update();

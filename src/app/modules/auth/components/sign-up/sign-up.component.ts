@@ -46,7 +46,7 @@ export class SignUpComponent {
       )
       .subscribe(res => {
         this.router.navigateByUrl('/');
-        this.snackBar.open('Успешная авторизация', 'Закрыть', {
+        this.snackBar.open('Success', 'Close', {
           duration: 2000
         });
       }, http => {
@@ -54,7 +54,7 @@ export class SignUpComponent {
         setErrorToForm(this.form, errors.apiErrors);
 
         errors.nonFieldErrors.forEach(error => {
-          this.snackBar.open(error, 'Закрыть');
+          this.snackBar.open(error, 'Close');
         });
 
         this.formValidatorService.update();

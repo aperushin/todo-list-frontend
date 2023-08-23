@@ -35,7 +35,7 @@ export class BotVerificationComponent {
       finalize(() => this.isLoading$.next(false)),
       untilDestroyed(this),
     ).subscribe(() => {
-      this.snackBar.open('Успешная валидация', undefined, {
+      this.snackBar.open('Validation success', undefined, {
         duration: 2000,
       });
       this.dialogRef.close();

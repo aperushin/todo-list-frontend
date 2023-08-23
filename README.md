@@ -1,11 +1,7 @@
 # Skypro
-Курс 6
-https://skyengpublic.notion.site/PD-db5795fb1c9640338a7947e49a9acafd
+Original: https://github.com/skypro-008/todo-list-frontend/tree/lesson-38
 
-master - Урок 34
-lesson-35 - Урок 35
-lesson-36 - Урок 36
-lesson-37 - Урок 36
+This is a fork with Google authentication instead of VK, as well as the interface translated to English.
 
 ## Development server
 

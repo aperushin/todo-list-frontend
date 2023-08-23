@@ -32,7 +32,7 @@ export class GoalDetailComponent implements OnInit {
   commentOrderFields: Entity[] = [
     { id: '', title: 'New first' },
     { id: 'created', title: 'Old first' },
-    { id: 'updated', title: 'Recently updated' }
+    { id: '-updated', title: 'Recently updated' }
   ];
 
   private isLoadingAddComment$ = new BehaviorSubject<boolean>(false);

@@ -6,9 +6,15 @@ jobs:
     steps:
       - name: clone code
         uses: actions/checkout@v2
-      - name: docker build
-        run: docker build -f docker/Dockerfile -t sermalenk/skypro-front:$GITHUB_REF_NAME .
-      - name: docker login
-        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - name: docker push
-        run: docker push sermalenk/skypro-front:$GITHUB_REF_NAME
+      - uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/setup-buildx-action@v2
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todolist-front:latest
